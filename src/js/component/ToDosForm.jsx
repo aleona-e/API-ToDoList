@@ -6,6 +6,7 @@ export const ToDosForm = (props) => {
 	const addToDo = (newToDo) => {
 		let notifyNewTask = props.addNewToDo;
 		notifyNewTask(newToDo);
+		setNewToDo("");
 	};
 
 	return (

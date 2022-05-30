@@ -11,7 +11,7 @@ export const ToDos = (props) => {
 					<button
 						onClick={() => props.deleteToDo(index)}
 						type="button"
-						className="btn-close"
+						className="mouseOver btn-close ms-2"
 					/>
 				</span>
 			</li>

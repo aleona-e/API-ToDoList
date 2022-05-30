@@ -23,14 +23,20 @@ const Home = () => {
 	return (
 		<div className="container">
 			<br></br>
-			<Heading />
-			<ToDosForm
-				placeholder={"What is missing to be done?"}
-				addNewToDo={addToDo}
-			/>
-			<br></br>
-			<br></br>
-			<ToDos toDoList={toDoList} deleteToDo={deleteToDo} />
+			<div className="card mx-auto">
+				<div className="card-header">
+					<Heading />
+				</div>
+				<div className="card-body">
+					<ToDosForm
+						placeholder={"What is missing to be done?"}
+						addNewToDo={addToDo}
+					/>
+					<br></br>
+					<br></br>
+					<ToDos toDoList={toDoList} deleteToDo={deleteToDo} />
+				</div>
+			</div>
 		</div>
 	);
 };

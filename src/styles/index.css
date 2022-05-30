@@ -12,3 +12,11 @@ h1 {
  .butonRight {
      float: right
  }
+ 
+ .card {
+     width: 18rem;
+ }
+
+ li {
+     list-style-type: none;
+ }
