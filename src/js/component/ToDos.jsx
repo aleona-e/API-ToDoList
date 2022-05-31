@@ -6,7 +6,7 @@ export const ToDos = (props) => {
 	const shownToDoList = toDoList.map((newToDo, index) => {
 		return (
 			<li key={index}>
-				{newToDo}
+				{newToDo.label}
 				<span className="buttonRight">
 					<button
 						onClick={() => props.deleteToDo(index)}

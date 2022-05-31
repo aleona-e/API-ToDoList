@@ -1,23 +1,33 @@
 import propTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heading } from "./Heading.jsx";
 import { ToDosForm } from "./ToDosForm.jsx";
 import { ToDos } from "./ToDos.jsx";
+import { addToDoApi, getAllTasks } from "../toDoAPI.js";
 
 const Home = () => {
 	const [toDoList, addNewToDo] = useState([]);
 
-	const addToDo = (toDo) => {
+	useEffect(() => {
+		getAllTasks().then((data) => {
+			addNewToDo(data);
+		});
+	}, [addNewToDo]);
+
+	function addToDo(toDo) {
 		addNewToDo(toDoList.concat(toDo));
-		console.log(toDoList);
-	};
+		let currenntList = toDoList.concat(toDo);
+		addToDoApi(currenntList);
+		console.log(currenntList);
+	}
 
 	const deleteToDo = (index) => {
-		const removeTodo = toDoList.filter((toDo, idCounter) => {
+		const removeTodoList = toDoList.filter((toDo, idCounter) => {
 			return index !== idCounter;
 		});
-		console.log(removeTodo);
-		addNewToDo(removeTodo);
+
+		addToDoApi(removeTodoList);
+		addNewToDo(removeTodoList);
 	};
 
 	return (
