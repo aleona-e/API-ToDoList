@@ -4,7 +4,7 @@ export const ToDosForm = (props) => {
 	const [newToDo, setNewToDo] = useState("");
 
 	const addToDo = (newToDo) => {
-		let toDoObj = { label: newToDo, done: false };
+		let toDoObj = { text: newToDo, done: false };
 		let notifyNewTask = props.addNewToDo;
 		notifyNewTask(toDoObj);
 		setNewToDo("");

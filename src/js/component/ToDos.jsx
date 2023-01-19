@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
 export const ToDos = (props) => {
 	const toDoList = props.toDoList;
 
-	const shownToDoList = toDoList.map((newToDo, index) => {
+	const shownToDoList = toDoList.map((toDo, index) => {
 		return (
 			<li key={index}>
-				{newToDo.label}
+				{toDo.text}
 				<span className="buttonRight">
 					<button
-						onClick={() => props.deleteToDo(index)}
+						onClick={() => props.deleteToDo(toDo.id, index)}
 						type="button"
 						className="mouseOver btn-close ms-2"
 					/>

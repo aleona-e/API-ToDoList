@@ -1,33 +1,36 @@
-import propTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import { Heading } from "./Heading.jsx";
 import { ToDosForm } from "./ToDosForm.jsx";
 import { ToDos } from "./ToDos.jsx";
-import { addToDoApi, getAllTasks } from "../toDoAPI.js";
+import { addToDoApi, getAllTasks, deleteToDoApi } from "../toDoAPI.js";
 
 const Home = () => {
-	const [toDoList, addNewToDo] = useState([]);
+	const [toDoList, setTodoList] = useState([]);
+	const [shouldFetch, setShouldFetch] = useState(true);
 
 	useEffect(() => {
-		getAllTasks().then((data) => {
-			addNewToDo(data);
+		if (shouldFetch) {
+			getAllTasks().then((data) => {
+				setTodoList([...data]);
+				setShouldFetch(false);
+			});
+		}
+	}, [shouldFetch]);
+
+	const addToDo = (toDo) => {
+		let currentList = toDoList.concat(toDo);
+		setTodoList(currentList);
+		addToDoApi(toDo).then(() => {
+			setShouldFetch(true);
 		});
-	}, [addNewToDo]);
+	};
 
-	function addToDo(toDo) {
-		addNewToDo(toDoList.concat(toDo));
-		let currenntList = toDoList.concat(toDo);
-		addToDoApi(currenntList);
-		console.log(currenntList);
-	}
-
-	const deleteToDo = (index) => {
+	const deleteToDo = (id, index) => {
+		deleteToDoApi(id);
 		const removeTodoList = toDoList.filter((toDo, idCounter) => {
 			return index !== idCounter;
 		});
-
-		addToDoApi(removeTodoList);
-		addNewToDo(removeTodoList);
+		setTodoList(removeTodoList);
 	};
 
 	return (
